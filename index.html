@@ -657,7 +657,7 @@
   @media (max-width: 52rem) {
     .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     .hero-photo { justify-self: center; max-width: 19rem; }
-    .arrive-cols { grid-template-columns: 1fr; }
+    .arrive-cols, .arrive-cols.no-photo { grid-template-columns: 1fr; }
     .arrive-photo { max-width: 22rem; margin: 0 auto; }
     .bio .wrap { grid-template-columns: 1fr; gap: 2.5rem; }
     .bio-photo { margin: 0 auto; }
@@ -666,7 +666,7 @@
   @media (max-width: 46rem) {
     section { padding: 3.5rem 0; }
     .hero { padding: 4rem 0 3.5rem; }
-    .diag-foot { gap: 1.5rem; margin-top: 2rem; }
+    .diag-foot { flex-direction: column; align-items: flex-start; gap: 1.25rem; margin-top: 2rem; }
     .diag-photo { width: 9rem; }
     .get-grid, .oldway-grid { grid-template-columns: 1fr; }
     .btn { width: 100%; justify-content: center; }
