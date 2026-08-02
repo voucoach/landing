@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Коучинг для Senior+ в IT — от анализа к решению</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F7EFE1;
+    --ink: #26241C;
+    --muted: #6E6A5B;
+    --line: #E5DAC4;
+    --card: #FFFDF8;
+    --green: #5A6539;
+    --green-deep: #3A4224;
+    --green-tint: #E9EAD4;
+    --terra: #C2622F;
+    --peach: #F3D9BA;
+    --peach-soft: #F9EAD5;
+    --serif: "Yeseva One", Georgia, serif;
+    --accent-italic: "Cormorant Garamond", Georgia, serif;
+    --sans: "Golos Text", sans-serif;
+    --radius: 24px;
+    --squiggle: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 12" preserveAspectRatio="none"><path d="M0 8 Q 12.5 1 25 8 T 50 8 T 75 8 T 100 8" fill="none" stroke="%23C2622F" stroke-width="4" stroke-linecap="round"/></svg>');
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* warm film grain over everything */
+  .grain {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    pointer-events: none;
+    opacity: 0.055;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/></filter><rect width="180" height="180" filter="url(%23n)"/></svg>');
+  }
+
+  .wrap {
+    max-width: 68rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  .narrow { max-width: 50rem; }
+
+  section { padding: 5rem 0; position: relative; }
+
+  h1, h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    line-height: 1.22;
+    letter-spacing: 0.005em;
+  }
+  h2 { font-size: clamp(1.55rem, 3.3vw, 2.3rem); margin-bottom: 2rem; }
+
+  img { max-width: 100%; display: block; }
+
+  .accent-i {
+    font-family: var(--accent-italic);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.15em;
+  }
+
+  /* hand-drawn squiggle underline */
+  .hl {
+    position: relative;
+    white-space: nowrap;
+  }
+  .hl::after {
+    content: "";
+    position: absolute;
+    left: -0.05em; right: -0.05em;
+    bottom: -0.22em;
+    height: 0.3em;
+    background: var(--squiggle) no-repeat center / 100% 100%;
+  }
+
+  /* section number marker */
+  .sec-num {
+    font-family: var(--sans);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--terra);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .sec-num::after {
+    content: "";
+    height: 6px;
+    width: 3.5rem;
+    background: var(--squiggle) no-repeat center / 100% 100%;
+    opacity: 0.7;
+  }
+
+  /* ---------- Buttons & social ---------- */
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    background: var(--green);
+    color: #F7EFE1;
+    font-family: var(--sans);
+    font-size: 1.0625rem;
+    font-weight: 600;
+    line-height: 1.3;
+    text-decoration: none;
+    padding: 1.15rem 2.1rem;
+    border-radius: 999px;
+    transition: background 0.25s ease, transform 0.25s ease;
+    box-shadow: 0 12px 28px -12px rgba(30, 60, 43, 0.5);
+  }
+  .btn .arr { transition: transform 0.25s ease; }
+  .btn:hover { background: var(--green-deep); transform: translateY(-2px); }
+  .btn:hover .arr { transform: translateX(5px); }
+
+  .btn.btn-light {
+    background: var(--paper);
+    color: var(--green-deep);
+    box-shadow: 0 12px 28px -12px rgba(0, 0, 0, 0.45);
+  }
+  .btn.btn-light:hover { background: #fff; }
+
+  .btn:focus-visible, a:focus-visible {
+    outline: 3px solid var(--terra);
+    outline-offset: 3px;
+  }
+
+  .social-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.2rem;
+  }
+  .social {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--green-deep);
+    text-decoration: none;
+    padding: 0.55rem 1.1rem 0.55rem 0.65rem;
+    border: 1.5px solid var(--line);
+    border-radius: 999px;
+    background: var(--card);
+    transition: transform 0.25s ease, border-color 0.25s ease;
+  }
+  .social:hover { transform: translateY(-2px) rotate(-1deg); border-color: var(--terra); }
+  .social .ic {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--green-tint);
+    color: var(--green);
+  }
+  .social.ig .ic { background: var(--peach-soft); color: var(--terra); }
+  .social svg { width: 1.1rem; height: 1.1rem; }
+
+  .final .social { background: transparent; border-color: rgba(247, 239, 225, 0.3); color: var(--paper); }
+  .final .social .ic { background: rgba(247, 239, 225, 0.12); color: var(--peach); }
+  .final .social:hover { border-color: var(--peach); }
+  .final .social-row { justify-content: center; }
+
+  /* ---------- Photo frames ---------- */
+
+  .photo-arch img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 58% 42% 47% 53% / 52% 55% 45% 48%;
+    transition: border-radius 0.6s ease;
+  }
+  .photo-arch:hover img { border-radius: 47% 53% 58% 42% / 45% 48% 52% 55%; }
+  .photo-arch {
+    position: relative;
+  }
+  .photo-arch::before {
+    content: "";
+    position: absolute;
+    inset: auto -1.25rem -1.25rem auto;
+    width: 55%;
+    height: 55%;
+    background: var(--peach);
+    border-radius: 44% 56% 51% 49% / 55% 43% 57% 45%;
+    z-index: -1;
+  }
+
+  .polaroid {
+    background: #fff;
+    padding: 0.7rem 0.7rem 1rem;
+    border-radius: 10px;
+    box-shadow: 0 18px 40px -18px rgba(38, 36, 28, 0.4);
+    transition: transform 0.35s ease;
+  }
+  .polaroid img { border-radius: 6px; aspect-ratio: 4 / 5; object-fit: cover; }
+  .polaroid:hover { transform: rotate(0deg) translateY(-6px) !important; }
+
+  /* ---------- Wave dividers (Baltic shoreline) ---------- */
+
+  .wave { display: block; width: 100%; height: 3.2rem; margin-bottom: -1px; }
+  .wave svg { width: 100%; height: 100%; display: block; }
+
+  /* ---------- Hero ---------- */
+
+  .hero {
+    padding: 5.5rem 0 5rem;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at 90% 8%, rgba(194, 98, 47, 0.10), transparent 45%),
+      radial-gradient(ellipse at 5% 85%, rgba(46, 91, 65, 0.08), transparent 40%);
+  }
+
+  .hero-q {
+    position: absolute;
+    top: -0.15em;
+    right: -0.05em;
+    font-family: var(--serif);
+    font-size: clamp(20rem, 42vw, 36rem);
+    line-height: 1;
+    color: var(--green);
+    opacity: 0.06;
+    user-select: none;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero .wrap { position: relative; z-index: 1; }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: 3.5rem;
+    align-items: center;
+  }
+
+  .hero-photo { max-width: 24rem; justify-self: end; width: 100%; }
+  .hero-photo img { aspect-ratio: 4 / 5; }
+
+  .chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 2rem;
+  }
+  .chip {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.45rem 1rem;
+    border-radius: 999px;
+    border: 1.5px solid var(--green);
+    color: var(--green);
+    background: transparent;
+    transform: rotate(-1deg);
+  }
+  .chip.chip-fill { background: var(--peach); border-color: var(--peach); color: var(--ink); transform: rotate(1.2deg); }
+
+  .hero h1 {
+    font-size: clamp(1.9rem, 4.8vw, 3.3rem);
+    max-width: 19ch;
+    margin-bottom: 1.75rem;
+  }
+
+  .hero .tagline {
+    font-family: var(--accent-italic);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.25rem, 2.6vw, 1.55rem);
+    color: var(--muted);
+    max-width: 34rem;
+    margin-bottom: 2.25rem;
+  }
+
+  .hero-cred {
+    font-size: 0.9688rem;
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: 34rem;
+    padding-left: 1.15rem;
+    border-left: 3px solid var(--peach);
+    margin-bottom: 2.25rem;
+  }
+
+  .hero-points {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin: 2.75rem 0 0;
+  }
+  .hero-points li {
+    flex: 1 1 15rem;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 1.15rem 1.3rem;
+    font-size: 0.9688rem;
+    line-height: 1.55;
+  }
+  .hero-points li::before {
+    content: "→";
+    display: block;
+    color: var(--terra);
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+  .hero-points li:nth-child(2) { transform: rotate(0.6deg); background: var(--green-tint); border-color: transparent; }
+  .hero-points li:nth-child(1) { transform: rotate(-0.5deg); }
+  .hero-points li:nth-child(3) { transform: rotate(-0.4deg); background: var(--peach-soft); border-color: transparent; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-anim > * {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .hero-anim > *:nth-child(1) { animation-delay: 0.05s; }
+    .hero-anim > *:nth-child(2) { animation-delay: 0.15s; }
+    .hero-anim > *:nth-child(3) { animation-delay: 0.28s; }
+    .hero-anim > *:nth-child(4) { animation-delay: 0.42s; }
+    .hero-anim > *:nth-child(5) { animation-delay: 0.55s; }
+    .hero-anim > *:nth-child(6) { animation-delay: 0.68s; }
+    .hero-photo {
+      opacity: 0;
+      transform: translateY(24px) rotate(1.5deg);
+      animation: rise 1s cubic-bezier(0.22, 1, 0.36, 1) 0.35s forwards;
+    }
+    .hero-points {
+      opacity: 0;
+      animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.62s forwards;
+    }
+    .hero-q {
+      opacity: 0;
+      animation: ghost 1.4s ease 0.4s forwards;
+    }
+  }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+  @keyframes ghost { to { opacity: 0.06; } }
+
+  /* ---------- Requests section ---------- */
+
+  .diag { background: var(--green-tint); }
+  .diag h2 { max-width: 30ch; }
+
+  .diag-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2.75rem;
+  }
+
+  .diag-photo {
+    flex: none;
+    width: 11rem;
+    transform: rotate(-2.5deg);
+  }
+
+  .diag-note {
+    font-size: 0.9688rem;
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: 30rem;
+  }
+
+  /* ---------- What you get ---------- */
+
+  .get-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    list-style: none;
+  }
+  .get-grid li {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    line-height: 1.6;
+  }
+  .get-grid li strong {
+    display: block;
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.1rem;
+    line-height: 1.4;
+    margin-bottom: 0.6rem;
+  }
+  .get-grid li:nth-child(odd) { background: var(--peach-soft); border-color: transparent; transform: rotate(-0.4deg); }
+  .get-grid li:nth-child(even) { transform: rotate(0.4deg); }
+
+  /* ---------- Recognize: chip cloud ---------- */
+
+  .q-cloud {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+  .q-cloud li {
+    font-family: var(--accent-italic);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.15rem;
+    padding: 0.7rem 1.35rem;
+    border-radius: 999px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    transition: transform 0.25s ease, border-color 0.25s ease;
+  }
+  .q-cloud li:hover { transform: translateY(-3px) rotate(-1.5deg); border-color: var(--terra); }
+  .q-cloud li:nth-child(3n) { background: var(--peach-soft); border-color: transparent; transform: rotate(-0.8deg); }
+  .q-cloud li:nth-child(4n) { transform: rotate(0.8deg); }
+
+  .stat-line {
+    font-family: var(--accent-italic);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 1.55;
+    color: var(--muted);
+    max-width: 38rem;
+    padding-left: 1.25rem;
+    border-left: 3px solid var(--terra);
+  }
+
+  /* ---------- Steps ---------- */
+
+  .steps { list-style: none; counter-reset: step; max-width: 46rem; }
+  .steps li {
+    counter-increment: step;
+    display: flex;
+    gap: 1.75rem;
+    padding: 1.6rem 0;
+  }
+  .steps li + li { border-top: 1px solid var(--line); }
+  .steps li::before {
+    content: "0" counter(step);
+    flex: none;
+    font-family: var(--serif);
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--terra);
+    min-width: 3.2rem;
+    padding-top: 0.2rem;
+  }
+
+  /* ---------- Arrive ---------- */
+
+  .arrive-cols {
+    display: grid;
+    grid-template-columns: 1fr 0.72fr 1fr;
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+  .arrive-cols.no-photo { grid-template-columns: 1fr 1fr; }
+  .arrive-card {
+    border-radius: var(--radius);
+    padding: 2.25rem;
+  }
+  .arrive-card.feel { background: var(--green-tint); transform: rotate(-0.5deg); }
+  .arrive-card.act { background: var(--peach-soft); transform: rotate(0.5deg); }
+  .arrive-card h3 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+  .arrive-card ul { list-style: none; }
+  .arrive-card li {
+    padding-left: 1.7rem;
+    position: relative;
+    margin-bottom: 0.9rem;
+    line-height: 1.6;
+  }
+  .arrive-card li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--terra);
+    font-weight: 600;
+  }
+  .arrive-card.feel li::before { color: var(--green); }
+
+  .arrive-photo img {
+    width: 100%;
+    height: 100%;
+    min-height: 18rem;
+    object-fit: cover;
+    border-radius: 52% 48% 44% 56% / 46% 54% 46% 54%;
+    transition: border-radius 0.6s ease;
+  }
+  .arrive-photo:hover img { border-radius: 44% 56% 52% 48% / 54% 46% 54% 46%; }
+
+  /* ---------- Doubts ---------- */
+
+  .doubt {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 2rem 2.25rem;
+    margin-bottom: 1.25rem;
+  }
+  .doubt:nth-child(odd) { transform: rotate(0.3deg); }
+  .doubt:nth-child(even) { transform: rotate(-0.3deg); }
+  .doubt:last-child { margin-bottom: 0; }
+  .doubt h3 {
+    font-family: var(--accent-italic);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.45rem;
+    line-height: 1.35;
+    margin-bottom: 0.75rem;
+    color: var(--green-deep);
+  }
+  .doubt p { color: var(--muted); }
+
+  /* ---------- Old way ---------- */
+
+  .oldway-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+  .oldway-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    line-height: 1.6;
+  }
+  .oldway-card strong {
+    display: block;
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* ---------- Gallery strip ---------- */
+
+  .gallery { padding-bottom: 5.5rem; }
+  .gallery-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.75rem;
+    justify-content: center;
+    margin-bottom: 2.25rem;
+  }
+  .gallery-strip .polaroid { flex: 0 1 14rem; }
+  .gallery-strip .polaroid:nth-child(1) { transform: rotate(-3deg); }
+  .gallery-strip .polaroid:nth-child(2) { transform: rotate(2deg) translateY(0.8rem); }
+  .gallery-strip .polaroid:nth-child(3) { transform: rotate(-1.5deg); }
+  .gallery-strip .polaroid:nth-child(4) { transform: rotate(2.5deg) translateY(0.6rem); }
+  .gallery-more { text-align: center; }
+
+  /* ---------- Bio ---------- */
+
+  .bio { background: var(--peach-soft); }
+  .bio .wrap {
+    display: grid;
+    grid-template-columns: 0.62fr 1.38fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .bio-photo { max-width: 19rem; position: relative; }
+  .bio-photo::before {
+    content: "";
+    position: absolute;
+    inset: auto auto -1.1rem -1.1rem;
+    width: 50%;
+    height: 50%;
+    background: var(--green-tint);
+    border-radius: 56% 44% 48% 52% / 47% 55% 45% 53%;
+    z-index: 0;
+  }
+  .bio-photo img {
+    aspect-ratio: 4 / 5;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 45% 55% 53% 47% / 55% 47% 53% 45%;
+    transition: border-radius 0.6s ease;
+    position: relative;
+    z-index: 1;
+  }
+  .bio-photo:hover img { border-radius: 53% 47% 45% 55% / 47% 53% 45% 55%; }
+  .bio-text p { margin-bottom: 0.75rem; font-size: 1.125rem; }
+  .bio-text p:last-child { margin-bottom: 0; }
+  .bio-text .sec-num { margin-bottom: 1.25rem; }
+
+  /* ---------- Final CTA ---------- */
+
+  .final {
+    background: var(--green-deep);
+    color: var(--paper);
+    text-align: center;
+    padding: 6rem 0 7rem;
+    overflow: hidden;
+  }
+  .final .final-q {
+    position: absolute;
+    bottom: -0.3em;
+    left: -0.05em;
+    font-family: var(--serif);
+    font-size: clamp(16rem, 34vw, 28rem);
+    line-height: 1;
+    color: var(--paper);
+    opacity: 0.05;
+    user-select: none;
+    pointer-events: none;
+  }
+  .final h2 {
+    font-size: clamp(1.7rem, 4.2vw, 2.7rem);
+    max-width: 24ch;
+    margin: 0 auto 2.5rem;
+  }
+  .final h2 .accent-i { color: var(--peach); }
+  .final .wrap { position: relative; z-index: 1; }
+
+  /* ---------- Scroll reveal ---------- */
+
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.75s ease, transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.in-view { opacity: 1; transform: none; }
+  }
+
+  /* ---------- Mobile ---------- */
+
+  @media (max-width: 52rem) {
+    .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .hero-photo { justify-self: center; max-width: 19rem; }
+    .arrive-cols { grid-template-columns: 1fr; }
+    .arrive-photo { max-width: 22rem; margin: 0 auto; }
+    .bio .wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+    .bio-photo { margin: 0 auto; }
+  }
+
+  @media (max-width: 46rem) {
+    section { padding: 3.5rem 0; }
+    .hero { padding: 4rem 0 3.5rem; }
+    .diag-foot { gap: 1.5rem; margin-top: 2rem; }
+    .diag-photo { width: 9rem; }
+    .get-grid, .oldway-grid { grid-template-columns: 1fr; }
+    .btn { width: 100%; justify-content: center; }
+    .hero-points li { flex-basis: 100%; }
+    .q-cloud li { font-size: 1.05rem; }
+    .gallery-strip { gap: 1.25rem; }
+    .gallery-strip .polaroid { flex: 0 1 42%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<main>
+
+  <!-- 1. Hero -->
+  <section class="hero">
+    <div class="hero-q" aria-hidden="true">?</div>
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-anim">
+          <div class="chip-row">
+            <span class="chip">Коучинг для Senior+ в IT</span>
+            <span class="chip chip-fill">Онлайн</span>
+          </div>
+          <h1>Вы уже всё проанализировали. Дело не в информации — дело в <span class="hl">решении</span></h1>
+          <p class="tagline">Для тех, кто привык разбираться сам — и упёрся в вопрос, который сам не решается.</p>
+          <p class="hero-cred">10 лет в IT: бизнес-аналитик, BA менеджер, ментор. Провожу ассессменты и внешние интервью. ICTA коуч.</p>
+          <p><a class="btn" href="https://t.me/voukava">Записаться на бесплатную ознакомительную встречу <span class="arr">→</span></a></p>
+          <div class="social-row">
+            <a class="social tg" href="https://t.me/voukava">
+              <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.7 3.3c.3-1-.7-1.8-1.6-1.4L2.6 8.7c-1 .4-1 1.9.1 2.2l4.5 1.4 1.7 5.5c.3.9 1.4 1.1 2 .4l2.4-2.7 4.5 3.3c.8.6 2 .2 2.2-.8l1.7-14.7zM8.4 12.9l9.3-5.8c.2-.1.4.2.2.3l-7.6 7-.3 3.1-1.6-4.6z"/></svg></span>
+              Telegram · @voukava
+            </a>
+            <a class="social ig" href="https://www.instagram.com/vou.coach">
+              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor" stroke="none"/></svg></span>
+              Instagram · @vou.coach
+            </a>
+          </div>
+        </div>
+        <figure class="photo-arch hero-photo" data-optional>
+          <img src="images/orange.jpeg" alt="Мария — трансформационный коуч ICTA">
+        </figure>
+      </div>
+      <ul class="hero-points">
+        <li>Бесплатная 30-минутная встреча — разобрать запрос и понять, ваш ли это формат</li>
+        <li>Пакет из 4 или 8 сессий, раз в одну-две недели — онлайн</li>
+        <li>К концу — решение, которое вы принимаете сами и которому доверяете</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="wave" aria-hidden="true"><svg viewBox="0 0 1440 52" preserveAspectRatio="none"><path d="M0,26 C180,52 360,0 540,26 C720,52 900,0 1080,26 C1260,52 1350,13 1440,26 L1440,52 L0,52 Z" fill="#E9EAD4"/></svg></div>
+
+  <!-- 2. Recognize yourself + real requests (merged) -->
+  <section class="diag reveal" style="padding-top: 3.5rem;">
+    <div class="wrap">
+      <p class="sec-num">/01 · Узнаёте себя?</p>
+      <h2>Примеры запросов, с которыми я сейчас работаю</h2>
+      <ul class="q-cloud">
+        <li>Обдумываете изменения второй год — и всё ещё на месте</li>
+        <li>Взвешиваете варианты месяцами</li>
+        <li>Не понимаете, нужен ли вам менеджмент</li>
+        <li>Ждёте, что ситуация прояснится сама</li>
+        <li>Теряетесь в шуме про AI и не понимаете, во что вкладывать своё время</li>
+        <li>Знаете, чего не хотите, но не знаете, чего хотите</li>
+        <li>Формально всё в порядке, но энергии на эту работу больше нет</li>
+        <li>Соглашаетесь на задачи, которые не выбирали</li>
+        <li>Хотите перемен, но не понимаете, куда расти и каких навыков не хватает</li>
+      </ul>
+      <div class="diag-foot">
+        <figure class="polaroid diag-photo" data-optional>
+          <img src="images/notebook.jpg" alt="Записи в блокноте — вопросы к себе">
+        </figure>
+        <p class="diag-note" style="max-width: none;">Запрос не обязан быть карьерным. Важнее, что он давно не двигается.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. How you'll get it done -->
+  <section class="reveal">
+    <div class="wrap">
+      <p class="sec-num">/02 · Как проходит работа</p>
+      <ol class="steps">
+        <li><span>Записываетесь на бесплатную 30-минутную ознакомительную встречу</span></li>
+        <li><span>Если договариваемся работать, определяем размер пакета (4 или 8 сессий), стоимость и периодичность — раз в неделю или раз в две. Сессия длится 50 минут, онлайн; я в часовом поясе Риги.</span></li>
+        <li><span>Оговариваем правила работы — отмена и перенос сессий, домашние задания, конфиденциальность, записи, этический кодекс, ответственность за результат, возврат оплаты и другие аспекты работы</span></li>
+        <li><span>В начале каждой сессии актуализируем запрос (он может измениться в процессе работы, и это нормально), в конце — подводим итоги и определяем план активностей до следующей сессии</span></li>
+        <li><span>А в конце всегда есть много поводов похвалить себя за то, что уделили себе время и работали над тем, чтобы сдвинуться с места!</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 6. Where you arrive -->
+  <section class="reveal">
+    <div class="wrap">
+      <p class="sec-num">/03 · Куда вы придёте</p>
+      <div class="arrive-cols" id="arriveCols">
+        <div class="arrive-card feel">
+          <h3>Что вы почувствуете:</h3>
+          <ul>
+            <li>Спокойствие вместо тревоги</li>
+            <li>Контроль вместо ощущения, что вас куда-то несёт</li>
+            <li>Доверие собственному суждению</li>
+          </ul>
+        </div>
+        <figure class="arrive-photo" data-optional data-hide-class="no-photo" data-hide-target="arriveCols">
+          <img src="images/calm.jpg" alt="Спокойствие: с кружкой чая среди дюн">
+        </figure>
+        <div class="arrive-card act">
+          <h3>Что вы сделаете:</h3>
+          <ul>
+            <li>Осознанно примете решение в важном для вас вопросе</li>
+            <li>Протестируете свои гипотезы на практике</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Your doubts, answered -->
+  <section class="reveal">
+    <div class="wrap narrow">
+      <p class="sec-num">/04 · Частые сомнения</p>
+      <div class="doubt">
+        <h3>«У меня вроде всё нормально — разве это повод?»</h3>
+        <p>Достаточно того, что вопрос не двигается. Не обязательно ждать, пока станет тяжелее.</p>
+      </div>
+      <div class="doubt">
+        <h3>«Почему именно вам доверить такой важный вопрос?»</h3>
+        <p>Со мной не придётся объяснять контекст с нуля. 10 лет в IT, сейчас Business Analysis Manager: я проводила ассессменты и внешние интервью, то есть видела планку Senior+ с обеих сторон стола. Я знаю, как выглядит рост в среде, где «от меня ничего не зависит», — и что в ней всё-таки можно менять.</p>
+        <p>При этом я не карьерный консультант и не буду говорить, какой путь выбрать. Многие из этих запросов я проходила или прохожу сама — но мой ответ не обязан быть вашим. Сертифицирована по стандартам коучинговой ассоциации ICTA, регулярно хожу на супервизии.</p>
+      </div>
+      <div class="doubt">
+        <h3>«Я плачу за ясность и план, но без гарантии повышения или новой роли — стоит ли оно того?»</h3>
+        <p>Конкретный внешний результат зависит от ваших действий и внешних условий. Но вы получаете реалистичный план и понимание своих ресурсов и ограничений — то, с чего вообще можно начать двигаться.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Why not the old way -->
+  <section class="reveal">
+    <div class="wrap">
+      <p class="sec-num">/05 · Почему не привычные способы</p>
+      <div class="oldway-grid">
+        <div class="oldway-card"><strong>Друзья и партнёр</strong> искренне поддержат, но их совет — это их опыт, не ваш, и не всегда есть время выслушать.</div>
+        <div class="oldway-card"><strong>Терапия</strong> работает с чувствами и прошлым, коучинг — с настоящим и будущим: помогает найти свой ответ и понять, что можно попробовать уже сейчас.</div>
+        <div class="oldway-card"><strong>Менторы на работе</strong> могут научить конкретному навыку. Но может быть конфликт интересов, и может быть страшно показаться слабым.</div>
+        <div class="oldway-card"><strong>Статьи и курсы про карьерный рост</strong> дают общие рамки, но не учитывают именно вашу ситуацию.</div>
+        <div class="oldway-card"><strong>Советы от GPT</strong> бывают неплохой отправной точкой, но они универсальные, не под ваш контекст. И там нет живого человека, который замечает не только слова, но и то, как вы их произносите.</div>
+      </div>
+      <p class="diag-note" style="margin-top: 1.75rem; max-width: none;">Иногда полезен взгляд коллеги, которая те же процессы видела изнутри. Когда это уместно, я могу сказать что-то вроде «сейчас я на минуту выйду из роли коуча и поделюсь наблюдением — берите, если откликается», затем вернуться в коучинговую позицию. Никаких непрошенных советов :)</p>
+    </div>
+  </section>
+
+  <!-- Gallery strip -->
+  <section class="gallery reveal">
+    <div class="wrap">
+      <div class="gallery-strip">
+        <figure class="polaroid" data-optional><img src="images/bench.jpg" alt="Записи в блокноте на скамейке у моря"></figure>
+        <figure class="polaroid" data-optional><img src="images/cup.jpg" alt="Кружка чая в ладонях"></figure>
+        <figure class="polaroid" data-optional><img src="images/duck.jpeg" alt="На скамейке у моря, рядом утка"></figure>
+      </div>
+      <p class="gallery-more">
+        <a class="social ig" href="https://www.instagram.com/vou.coach">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor" stroke="none"/></svg></span>
+          Больше — в Instagram · @vou.coach
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- 8b. Who's behind this -->
+  <section class="bio reveal">
+    <div class="wrap">
+      <figure class="bio-photo">
+        <img src="images/portrait-studio.jpg" alt="Мария — трансформационный коуч ICTA">
+      </figure>
+      <div class="bio-text">
+        <p class="sec-num">/06 · Кто ведёт сессии</p>
+        <p>Я Мария Волкова, сейчас живу в Риге, сама из Минска, ещё жила в Варшаве и Москве.</p>
+        <p>10 лет в IT — бизнес-аналитик, BA-менеджер, ресурсный менеджер. Провожу ассессменты и внешние интервью, поэтому хорошо представляю, как выглядит планка Senior+ изнутри.</p>
+        <p>В 2025 сертифицировалась как трансформационный коуч по стандарту ICTA (школа «Вектор Роста»), там же прошла курс «Эннеаграмма в коучинге». Регулярно хожу на супервизии.</p>
+        <p>Учусь в Балтийском Институте Психотерапии на интегративном подходе. Психотерапевтом быть не планирую — но это обучение помогает замечать больше сигналов: не только то, что человек говорит, но и то, как он это говорит. И вовремя увидеть случаи, когда нужен не коуч, а психотерапевт.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="wave" aria-hidden="true" style="background: var(--peach-soft);"><svg viewBox="0 0 1440 52" preserveAspectRatio="none"><path d="M0,26 C180,52 360,0 540,26 C720,52 900,0 1080,26 C1260,52 1350,13 1440,26 L1440,52 L0,52 Z" fill="#3A4224"/></svg></div>
+
+  <!-- 9. The action -->
+  <section class="final reveal" style="padding-top: 4.5rem;">
+    <div class="final-q" aria-hidden="true">?</div>
+    <div class="wrap">
+      <h2>Начать можно с <span class="accent-i">одного разговора</span>. Он бесплатный, 30 минут, и ни к чему не обязывает.</h2>
+      <p><a class="btn btn-light" href="https://t.me/voukava">Записаться на бесплатную ознакомительную встречу <span class="arr">→</span></a></p>
+      <div class="social-row">
+        <a class="social tg" href="https://t.me/voukava">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.7 3.3c.3-1-.7-1.8-1.6-1.4L2.6 8.7c-1 .4-1 1.9.1 2.2l4.5 1.4 1.7 5.5c.3.9 1.4 1.1 2 .4l2.4-2.7 4.5 3.3c.8.6 2 .2 2.2-.8l1.7-14.7zM8.4 12.9l9.3-5.8c.2-.1.4.2.2.3l-7.6 7-.3 3.1-1.6-4.6z"/></svg></span>
+          Telegram · @voukava
+        </a>
+        <a class="social ig" href="https://www.instagram.com/vou.coach">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor" stroke="none"/></svg></span>
+          Instagram · @vou.coach
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  (function () {
+    // Hide optional photo slots whose image file is not present yet
+    document.querySelectorAll("figure[data-optional]").forEach(function (fig) {
+      var img = fig.querySelector("img");
+      var hide = function () {
+        fig.style.display = "none";
+        var targetId = fig.getAttribute("data-hide-target");
+        var cls = fig.getAttribute("data-hide-class");
+        if (targetId && cls) {
+          var t = document.getElementById(targetId);
+          if (t) t.classList.add(cls);
+        }
+      };
+      if (img.complete && img.naturalWidth === 0) hide();
+      else img.addEventListener("error", hide);
+    });
+
+    var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var targets = document.querySelectorAll(".reveal");
+    if (reduced || !("IntersectionObserver" in window)) {
+      targets.forEach(function (el) { el.classList.add("in-view"); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
+    targets.forEach(function (el) { io.observe(el); });
+  })();
+</script>
+
+</body>
+</html>
