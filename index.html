@@ -56,7 +56,6 @@
     margin: 0 auto;
     padding: 0 1.5rem;
   }
-  .narrow { max-width: 50rem; }
 
   section { padding: 5rem 0; position: relative; }
 
@@ -366,20 +365,6 @@
   .diag { background: var(--green-tint); }
   .diag h2 { max-width: 30ch; }
 
-  .diag-foot {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 2rem;
-    margin-top: 2.75rem;
-  }
-
-  .diag-photo {
-    flex: none;
-    width: 11rem;
-    transform: rotate(-2.5deg);
-  }
-
   .diag-note {
     font-size: 0.9688rem;
     line-height: 1.6;
@@ -422,10 +407,8 @@
     gap: 0.8rem;
   }
   .q-cloud li {
-    font-family: var(--accent-italic);
-    font-style: italic;
-    font-weight: 500;
-    font-size: 1.15rem;
+    font-family: var(--sans);
+    font-size: 1.0625rem;
     padding: 0.7rem 1.35rem;
     border-radius: 999px;
     background: var(--card);
@@ -433,7 +416,7 @@
     transition: transform 0.25s ease, border-color 0.25s ease;
   }
   .q-cloud li:hover { transform: translateY(-3px) rotate(-1.5deg); border-color: var(--terra); }
-  .q-cloud li:nth-child(3n) { background: var(--peach-soft); border-color: transparent; transform: rotate(-0.8deg); }
+  .q-cloud li:nth-child(3n) { transform: rotate(-0.8deg); }
   .q-cloud li:nth-child(4n) { transform: rotate(0.8deg); }
 
   .stat-line {
@@ -515,29 +498,6 @@
     transition: border-radius 0.6s ease;
   }
   .arrive-photo:hover img { border-radius: 44% 56% 52% 48% / 54% 46% 54% 46%; }
-
-  /* ---------- Doubts ---------- */
-
-  .doubt {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 2rem 2.25rem;
-    margin-bottom: 1.25rem;
-  }
-  .doubt:nth-child(odd) { transform: rotate(0.3deg); }
-  .doubt:nth-child(even) { transform: rotate(-0.3deg); }
-  .doubt:last-child { margin-bottom: 0; }
-  .doubt h3 {
-    font-family: var(--accent-italic);
-    font-style: italic;
-    font-weight: 600;
-    font-size: 1.45rem;
-    line-height: 1.35;
-    margin-bottom: 0.75rem;
-    color: var(--green-deep);
-  }
-  .doubt p { color: var(--muted); }
 
   /* ---------- Old way ---------- */
 
@@ -666,12 +626,9 @@
   @media (max-width: 46rem) {
     section { padding: 3.5rem 0; }
     .hero { padding: 4rem 0 3.5rem; }
-    .diag-foot { flex-direction: column; align-items: flex-start; gap: 1.25rem; margin-top: 2rem; }
-    .diag-photo { width: 9rem; }
     .get-grid, .oldway-grid { grid-template-columns: 1fr; }
     .btn { width: 100%; justify-content: center; }
     .hero-points li { flex-basis: 100%; }
-    .q-cloud li { font-size: 1.05rem; }
     .gallery-strip { gap: 1.25rem; }
     .gallery-strip .polaroid { flex: 0 1 42%; }
   }
@@ -730,7 +687,7 @@
       <ul class="q-cloud">
         <li>Обдумываете изменения второй год, и всё ещё на месте</li>
         <li>Взвешиваете варианты месяцами</li>
-        <li>Не понимаете, нужен ли вам менеджмент</li>
+        <li>Не понимаете, нужно ли вам в менеджмент</li>
         <li>Ждёте, что ситуация прояснится сама</li>
         <li>Теряетесь в шуме про AI и не понимаете, во что вкладывать своё время</li>
         <li>Знаете, чего не хотите, но не знаете, чего хотите</li>
@@ -738,12 +695,7 @@
         <li>Соглашаетесь на задачи, которые не выбирали</li>
         <li>Хотите перемен, но не понимаете, куда расти и каких навыков не хватает</li>
       </ul>
-      <div class="diag-foot">
-        <figure class="polaroid diag-photo" data-optional>
-          <img src="images/notebook.jpg" alt="Записи в блокноте: вопросы к себе">
-        </figure>
-        <p class="diag-note" style="max-width: none;">Запрос не обязан быть карьерным. Важнее, что он давно не двигается.</p>
-      </div>
+      <p class="diag-note" style="max-width: none; margin-top: 2.75rem;">Запрос не обязан быть карьерным. Важнее, что он давно не двигается.</p>
     </div>
   </section>
 
@@ -758,16 +710,34 @@
         <li><span>В начале каждой сессии актуализируем запрос (он может измениться в процессе работы, и это нормально); в конце подводим итоги и определяем план активностей до следующей сессии</span></li>
         <li><span>А в конце всегда есть много поводов похвалить себя за то, что уделили себе время и работали над тем, чтобы сдвинуться с места!</span></li>
       </ol>
+      <p style="text-align: center; margin-top: 2.5rem;"><a class="btn" href="https://t.me/voukava">Записаться на бесплатную ознакомительную встречу <span class="arr">→</span></a></p>
     </div>
   </section>
 
-  <!-- 6. Where you arrive -->
+  <!-- 4. Who's behind this -->
+  <section class="bio reveal">
+    <div class="wrap">
+      <figure class="bio-photo">
+        <img src="images/portrait-studio.jpg" alt="Мария, трансформационный коуч ICTA">
+      </figure>
+      <div class="bio-text">
+        <p class="sec-num">/03 · Кто я</p>
+        <p>Я Мария Волкова, сейчас живу в Риге, сама из Минска, ещё жила в Варшаве и Москве.</p>
+        <p>10 лет в IT: бизнес-аналитик, BA-менеджер, ресурсный менеджер. Провожу ассессменты и внешние интервью, поэтому вижу планку Senior+ с обеих сторон стола и знаю, как выглядит рост в среде, где «от меня ничего не зависит», и что в ней всё-таки можно менять.</p>
+        <p>При этом я не карьерный консультант и не буду говорить, какой путь выбрать. Многие из этих запросов я проходила или прохожу сама, но мой ответ не обязан быть вашим.</p>
+        <p>В 2025 сертифицировалась как трансформационный коуч по стандарту ICTA (школа «Вектор Роста»), там же прошла курс «Эннеаграмма в коучинге». Регулярно хожу на супервизии.</p>
+        <p>Учусь в Балтийском Институте Психотерапии на интегративном подходе. Психотерапевтом быть не планирую, но это обучение помогает замечать больше сигналов: не только то, что человек говорит, но и то, как он это говорит. И вовремя увидеть случаи, когда нужен не коуч, а психотерапевт.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Where you arrive -->
   <section class="reveal">
     <div class="wrap">
-      <p class="sec-num">/03 · Куда вы придёте</p>
+      <p class="sec-num">/04 · С чем уходили предыдущие клиенты</p>
       <div class="arrive-cols" id="arriveCols">
         <div class="arrive-card feel">
-          <h3>Что вы почувствуете:</h3>
+          <h3>Что чувствовали:</h3>
           <ul>
             <li>Спокойствие вместо тревоги</li>
             <li>Контроль вместо ощущения, что вас куда-то несёт</li>
@@ -778,37 +748,17 @@
           <img src="images/calm.jpg" alt="Спокойствие: с кружкой чая среди дюн">
         </figure>
         <div class="arrive-card act">
-          <h3>Что вы сделаете:</h3>
+          <h3>Что сделали:</h3>
           <ul>
-            <li>Осознанно примете решение в важном для вас вопросе</li>
-            <li>Протестируете свои гипотезы на практике</li>
+            <li>Осознанно приняли решение в важном для себя вопросе</li>
+            <li>Протестировали свои гипотезы на практике</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 7. Your doubts, answered -->
-  <section class="reveal">
-    <div class="wrap narrow">
-      <p class="sec-num">/04 · Частые сомнения</p>
-      <div class="doubt">
-        <h3>«У меня вроде всё нормально, разве это повод?»</h3>
-        <p>Достаточно того, что вопрос не двигается. Не обязательно ждать, пока станет тяжелее.</p>
-      </div>
-      <div class="doubt">
-        <h3>«Почему именно вам доверить такой важный вопрос?»</h3>
-        <p>Со мной не придётся объяснять контекст с нуля. 10 лет в IT, сейчас Business Analysis Manager: я проводила ассессменты и внешние интервью, то есть видела планку Senior+ с обеих сторон стола. Я знаю, как выглядит рост в среде, где «от меня ничего не зависит», и что в ней всё-таки можно менять.</p>
-        <p>При этом я не карьерный консультант и не буду говорить, какой путь выбрать. Многие из этих запросов я проходила или прохожу сама, но мой ответ не обязан быть вашим. Сертифицирована по стандартам коучинговой ассоциации ICTA, регулярно хожу на супервизии.</p>
-      </div>
-      <div class="doubt">
-        <h3>«Я плачу за ясность и план, но без гарантии повышения или новой роли, стоит ли оно того?»</h3>
-        <p>Конкретный внешний результат зависит от ваших действий и внешних условий. Но вы получаете реалистичный план и понимание своих ресурсов и ограничений: то, с чего вообще можно начать двигаться.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 8. Why not the old way -->
+  <!-- 6. Why not the old way -->
   <section class="reveal">
     <div class="wrap">
       <p class="sec-num">/05 · Почему не привычные способы</p>
@@ -840,23 +790,7 @@
     </div>
   </section>
 
-  <!-- 8b. Who's behind this -->
-  <section class="bio reveal">
-    <div class="wrap">
-      <figure class="bio-photo">
-        <img src="images/portrait-studio.jpg" alt="Мария, трансформационный коуч ICTA">
-      </figure>
-      <div class="bio-text">
-        <p class="sec-num">/06 · Кто ведёт сессии</p>
-        <p>Я Мария Волкова, сейчас живу в Риге, сама из Минска, ещё жила в Варшаве и Москве.</p>
-        <p>10 лет в IT: бизнес-аналитик, BA-менеджер, ресурсный менеджер. Провожу ассессменты и внешние интервью, поэтому хорошо представляю, как выглядит планка Senior+ изнутри.</p>
-        <p>В 2025 сертифицировалась как трансформационный коуч по стандарту ICTA (школа «Вектор Роста»), там же прошла курс «Эннеаграмма в коучинге». Регулярно хожу на супервизии.</p>
-        <p>Учусь в Балтийском Институте Психотерапии на интегративном подходе. Психотерапевтом быть не планирую, но это обучение помогает замечать больше сигналов: не только то, что человек говорит, но и то, как он это говорит. И вовремя увидеть случаи, когда нужен не коуч, а психотерапевт.</p>
-      </div>
-    </div>
-  </section>
-
-  <div class="wave" aria-hidden="true" style="background: var(--peach-soft);"><svg viewBox="0 0 1440 52" preserveAspectRatio="none"><path d="M0,26 C180,52 360,0 540,26 C720,52 900,0 1080,26 C1260,52 1350,13 1440,26 L1440,52 L0,52 Z" fill="#3A4224"/></svg></div>
+  <div class="wave" aria-hidden="true"><svg viewBox="0 0 1440 52" preserveAspectRatio="none"><path d="M0,26 C180,52 360,0 540,26 C720,52 900,0 1080,26 C1260,52 1350,13 1440,26 L1440,52 L0,52 Z" fill="#3A4224"/></svg></div>
 
   <!-- 9. The action -->
   <section class="final reveal" style="padding-top: 4.5rem;">
