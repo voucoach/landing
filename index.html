@@ -372,32 +372,6 @@
     max-width: 30rem;
   }
 
-  /* ---------- What you get ---------- */
-
-  .get-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
-    list-style: none;
-  }
-  .get-grid li {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 1.75rem;
-    line-height: 1.6;
-  }
-  .get-grid li strong {
-    display: block;
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: 1.1rem;
-    line-height: 1.4;
-    margin-bottom: 0.6rem;
-  }
-  .get-grid li:nth-child(odd) { background: var(--peach-soft); border-color: transparent; transform: rotate(-0.4deg); }
-  .get-grid li:nth-child(even) { transform: rotate(0.4deg); }
-
   /* ---------- Recognize: chip cloud ---------- */
 
   .q-cloud {
@@ -408,16 +382,14 @@
   }
   .q-cloud li {
     font-family: var(--sans);
-    font-size: 1.0625rem;
+    font-size: 0.9688rem;
     padding: 0.7rem 1.35rem;
     border-radius: 999px;
     background: var(--card);
     border: 1px solid var(--line);
     transition: transform 0.25s ease, border-color 0.25s ease;
   }
-  .q-cloud li:hover { transform: translateY(-3px) rotate(-1.5deg); border-color: var(--terra); }
-  .q-cloud li:nth-child(3n) { transform: rotate(-0.8deg); }
-  .q-cloud li:nth-child(4n) { transform: rotate(0.8deg); }
+  .q-cloud li:hover { transform: translateY(-3px); border-color: var(--terra); }
 
   .stat-line {
     font-family: var(--accent-italic);
@@ -521,6 +493,63 @@
     margin-bottom: 0.5rem;
   }
 
+  /* ---------- Pricing ---------- */
+
+  .pricing { background: var(--green-tint); }
+
+  .price-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    max-width: 48rem;
+  }
+
+  .price-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 2rem 2rem 2.25rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .price-card.accent { background: var(--peach-soft); border-color: transparent; }
+
+  .price-card h3 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.15rem;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+  }
+
+  .price-amount {
+    font-family: var(--serif);
+    font-size: 2.75rem;
+    line-height: 1;
+    color: var(--green-deep);
+  }
+  .price-per {
+    font-size: 0.9688rem;
+    color: var(--muted);
+    margin-top: 0.55rem;
+  }
+
+  .price-fit {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px dashed var(--line);
+    line-height: 1.6;
+  }
+  .price-card.accent .price-fit { border-top-color: rgba(110, 106, 91, 0.3); }
+
+  .price-note {
+    margin-top: 2rem;
+    max-width: 48rem;
+    font-size: 0.9688rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
   /* ---------- Gallery strip ---------- */
 
   .gallery { padding-bottom: 5.5rem; }
@@ -536,7 +565,6 @@
   .gallery-strip .polaroid:nth-child(2) { transform: rotate(2deg) translateY(0.8rem); }
   .gallery-strip .polaroid:nth-child(3) { transform: rotate(-1.5deg); }
   .gallery-strip .polaroid:nth-child(4) { transform: rotate(2.5deg) translateY(0.6rem); }
-  .gallery-more { text-align: center; }
 
   /* ---------- Bio ---------- */
 
@@ -626,7 +654,7 @@
   @media (max-width: 46rem) {
     section { padding: 3.5rem 0; }
     .hero { padding: 4rem 0 3.5rem; }
-    .get-grid, .oldway-grid { grid-template-columns: 1fr; }
+    .oldway-grid, .price-grid { grid-template-columns: 1fr; }
     .btn { width: 100%; justify-content: center; }
     .hero-points li { flex-basis: 100%; }
     .gallery-strip { gap: 1.25rem; }
@@ -651,9 +679,9 @@
             <span class="chip chip-fill">Онлайн</span>
           </div>
           <h1>Чтобы <span class="hl">решение</span> было вашим</h1>
-          <p class="tagline">Для тех, кто привык разбираться сам, но упёрся в вопрос, который сам не решается.</p>
+          <p class="tagline">Коучинг для тех, кто привык разбираться сам, но упёрся в вопрос, который сам не решается.</p>
           <p class="hero-cred">ICTA коуч. 10 лет в IT: бизнес-аналитик, BA менеджер, ментор. Провожу ассессменты и внешние интервью.</p>
-          <p><a class="btn" href="https://t.me/voukava">Записаться на бесплатную ознакомительную встречу <span class="arr">→</span></a></p>
+          <p><a class="btn" href="https://calendly.com/maryia-voukava/meet-with-me">Записаться на бесплатную ознакомительную встречу <span class="arr">→</span></a></p>
           <div class="social-row">
             <a class="social tg" href="https://t.me/voukava">
               <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.7 3.3c.3-1-.7-1.8-1.6-1.4L2.6 8.7c-1 .4-1 1.9.1 2.2l4.5 1.4 1.7 5.5c.3.9 1.4 1.1 2 .4l2.4-2.7 4.5 3.3c.8.6 2 .2 2.2-.8l1.7-14.7zM8.4 12.9l9.3-5.8c.2-.1.4.2.2.3l-7.6 7-.3 3.1-1.6-4.6z"/></svg></span>
@@ -710,7 +738,7 @@
         <li><span>В начале каждой сессии актуализируем запрос (он может измениться в процессе работы, и это нормально); в конце подводим итоги и определяем план активностей до следующей сессии</span></li>
         <li><span>А в конце всегда есть много поводов похвалить себя за то, что уделили себе время и работали над тем, чтобы сдвинуться с места!</span></li>
       </ol>
-      <p style="text-align: center; margin-top: 2.5rem;"><a class="btn" href="https://t.me/voukava">Записаться на бесплатную ознакомительную встречу <span class="arr">→</span></a></p>
+      <p style="text-align: center; margin-top: 2.5rem;"><a class="btn" href="https://calendly.com/maryia-voukava/meet-with-me">Записаться <span class="arr">→</span></a></p>
     </div>
   </section>
 
@@ -724,7 +752,7 @@
         <p class="sec-num">/03 · Кто я</p>
         <p>Я Мария Волкова, сейчас живу в Риге, сама из Минска, ещё жила в Варшаве и Москве.</p>
         <p>10 лет в IT: бизнес-аналитик, BA-менеджер, ресурсный менеджер. Провожу ассессменты и внешние интервью, поэтому вижу планку Senior+ с обеих сторон стола и знаю, как выглядит рост в среде, где «от меня ничего не зависит», и что в ней всё-таки можно менять.</p>
-        <p>При этом я не карьерный консультант и не буду говорить, какой путь выбрать. Многие из этих запросов я проходила или прохожу сама, но мой ответ не обязан быть вашим.</p>
+        <p>При этом я не карьерный консультант и не буду говорить, какой путь выбрать. Многие из этих запросов я проходила или прохожу сама, но ваш ответ может оказаться совсем другим.</p>
         <p>В 2025 сертифицировалась как трансформационный коуч по стандарту ICTA (школа «Вектор Роста»), там же прошла курс «Эннеаграмма в коучинге». Регулярно хожу на супервизии.</p>
         <p>Учусь в Балтийском Институте Психотерапии на интегративном подходе. Психотерапевтом быть не планирую, но это обучение помогает замечать больше сигналов: не только то, что человек говорит, но и то, как он это говорит. И вовремя увидеть случаи, когда нужен не коуч, а психотерапевт.</p>
       </div>
@@ -773,6 +801,28 @@
     </div>
   </section>
 
+  <!-- 8. Pricing -->
+  <section class="pricing reveal">
+    <div class="wrap">
+      <p class="sec-num">/06 · Стоимость</p>
+      <div class="price-grid">
+        <div class="price-card">
+          <h3>4 сессии</h3>
+          <p class="price-amount">200 €</p>
+          <p class="price-per">50 € за сессию</p>
+          <p class="price-fit">Когда запрос один и достаточно конкретный: например, принять решение, которое давно откладывается.</p>
+        </div>
+        <div class="price-card accent">
+          <h3>8 сессий</h3>
+          <p class="price-amount">360 €</p>
+          <p class="price-per">45 € за сессию</p>
+          <p class="price-fit">Когда вопрос сложнее или хочется не только найти решение, но и постепенно воплотить его в жизнь.</p>
+        </div>
+      </div>
+      <p class="price-note">Сессия длится 50 минут, проходит онлайн, раз в одну-две недели. Правила отмены, переноса и возврата оплаты оговариваем в начале работы, до первой сессии.</p>
+    </div>
+  </section>
+
   <!-- Gallery strip -->
   <section class="gallery reveal">
     <div class="wrap">
@@ -781,12 +831,6 @@
         <figure class="polaroid" data-optional><img src="images/cup.jpg" alt="Кружка чая в ладонях"></figure>
         <figure class="polaroid" data-optional><img src="images/duck.jpeg" alt="На скамейке у моря, рядом утка"></figure>
       </div>
-      <p class="gallery-more">
-        <a class="social ig" href="https://www.instagram.com/vou.coach">
-          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor" stroke="none"/></svg></span>
-          Больше в Instagram · @vou.coach
-        </a>
-      </p>
     </div>
   </section>
 
@@ -797,7 +841,7 @@
     <div class="final-q" aria-hidden="true">?</div>
     <div class="wrap">
       <h2>Начать можно с <span class="accent-i">одного разговора</span>. Он бесплатный, 30 минут, и ни к чему не обязывает.</h2>
-      <p><a class="btn btn-light" href="https://t.me/voukava">Записаться на бесплатную ознакомительную встречу <span class="arr">→</span></a></p>
+      <p><a class="btn btn-light" href="https://calendly.com/maryia-voukava/meet-with-me">Записаться на бесплатную ознакомительную встречу <span class="arr">→</span></a></p>
       <div class="social-row">
         <a class="social tg" href="https://t.me/voukava">
           <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.7 3.3c.3-1-.7-1.8-1.6-1.4L2.6 8.7c-1 .4-1 1.9.1 2.2l4.5 1.4 1.7 5.5c.3.9 1.4 1.1 2 .4l2.4-2.7 4.5 3.3c.8.6 2 .2 2.2-.8l1.7-14.7zM8.4 12.9l9.3-5.8c.2-.1.4.2.2.3l-7.6 7-.3 3.1-1.6-4.6z"/></svg></span>
